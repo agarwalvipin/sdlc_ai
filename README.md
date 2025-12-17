@@ -88,5 +88,33 @@ We use JSON Schema to strictly validate all governance artifacts.
 └── templates/              # Blank templates for new tasks
 ```
 
+## 📦 Onboarding to an Existing Project
+
+### Quick Setup (Script)
+
+```bash
+# Clone this repo
+git clone https://github.com/agarwalvipin/sdlc_ai.git
+
+# Run the onboarding script
+cd sdlc_ai
+./onboard.sh /path/to/your/project
+```
+
+### Manual Setup
+
+```bash
+# Copy framework directories
+cp -r .agent /path/to/your/project/
+cp -r schemas /path/to/your/project/
+cp -r templates /path/to/your/project/
+cp -r governance /path/to/your/project/
+
+# Create the architecture ledger
+mkdir -p /path/to/your/project/architecture
+```
+
+📖 See the full [Onboarding Guide](docs/onboarding.md) for details.
+
 ## License
 MIT
