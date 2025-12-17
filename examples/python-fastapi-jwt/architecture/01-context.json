@@ -1,0 +1,16 @@
+{
+    "ticket_id": "AUTH-001",
+    "read_only": [
+        "src/database.py",
+        "src/config.py"
+    ],
+    "read_write": [
+        "src/main.py",
+        "src/models.py",
+        "src/auth/"
+    ],
+    "forbidden": [
+        ".env",
+        "alembic.ini"
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "phase": "security",
+    "risk_score": "LOW",
+    "threat_model": [
+        {
+            "threat": "Name",
+            "mitigation": "Fix",
+            "status": "MITIGATED"
+        }
+    ],
+    "auth_review": {
+        "new_permissions": false,
+        "sensitive_data_exposure": false
+    }
+}

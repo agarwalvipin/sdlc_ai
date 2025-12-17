@@ -1,0 +1,48 @@
+{
+    "version": "1.0",
+    "strategy": "FEATURE",
+    "milestone_title": "JWT Auth Implementation",
+    "source_artifacts": [
+        "02-design.json",
+        "03-security.json"
+    ],
+    "epics": [
+        {
+            "id": "E1",
+            "title": "Setup",
+            "owner": "AI",
+            "description": "Install deps",
+            "tasks": [
+                {
+                    "title": "Install Dependencies",
+                    "type": "chore",
+                    "context_files": [
+                        "requirements.txt"
+                    ],
+                    "acceptance_criteria": [
+                        "pip install succeeds",
+                        "libs importable"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "E2",
+            "title": "Implementation",
+            "owner": "AI",
+            "description": "Core logic",
+            "tasks": [
+                {
+                    "title": "Auth Utils",
+                    "type": "feat",
+                    "context_files": [
+                        "src/auth/utils.py"
+                    ],
+                    "acceptance_criteria": [
+                        "Hash verifies correctly"
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,7 +1,10 @@
 {
+  "$id": "https://sdlc.ai/schemas/context-spec.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Context Specification",
+  "description": "Defines the blast radius and file permissions for a change request.",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "ticket_id",
     "read_only",
@@ -10,22 +13,26 @@
   ],
   "properties": {
     "ticket_id": {
-      "type": "string"
+      "type": "string",
+      "description": "Issue tracker ID (e.g., JIRA-123)."
     },
     "read_only": {
       "type": "array",
+      "description": "Files the agent can read but NOT modify.",
       "items": {
         "type": "string"
       }
     },
     "read_write": {
       "type": "array",
+      "description": "Files the agent is explicitly allowed to modify.",
       "items": {
         "type": "string"
       }
     },
     "forbidden": {
       "type": "array",
+      "description": "Files that must not be accessed.",
       "items": {
         "type": "string"
       }

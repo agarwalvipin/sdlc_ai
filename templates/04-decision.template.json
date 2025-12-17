@@ -1,0 +1,7 @@
+{
+    "phase": "decision",
+    "decision": "APPROVED",
+    "rationale": "Reason",
+    "human_signature": "Signature",
+    "date": "YYYY-MM-DD"
+}

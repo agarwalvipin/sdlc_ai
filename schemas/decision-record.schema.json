@@ -1,7 +1,10 @@
 {
+    "$id": "https://sdlc.ai/schemas/decision-record.schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Decision Record",
+    "description": "Records the final human decision on the proposed design.",
     "type": "object",
+    "additionalProperties": false,
     "required": [
         "phase",
         "decision",
@@ -19,15 +22,18 @@
             "enum": [
                 "REFACTOR",
                 "REBUILD",
-                "ABORT"
-            ]
+                "ABORT",
+                "APPROVED"
+            ],
+            "description": "The strategic choice made by the human."
         },
         "rationale": {
-            "type": "string"
+            "type": "string",
+            "description": "Reasoning behind the decision."
         },
         "human_signature": {
             "type": "string",
-            "description": "The explicit string typed by the user to approve."
+            "description": "Explicit string typed by the user to sign off."
         },
         "date": {
             "type": "string",

@@ -1,7 +1,10 @@
 {
+  "$id": "https://sdlc.ai/schemas/execution-plan.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Execution Plan",
+  "description": "Deterministic plan for code execution.",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "version",
     "strategy",
@@ -16,7 +19,8 @@
       "type": "string",
       "enum": [
         "REFACTOR",
-        "REBUILD"
+        "REBUILD",
+        "FEATURE"
       ]
     },
     "milestone_title": {
@@ -32,9 +36,9 @@
       "type": "array",
       "items": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
           "id",
-          "owner",
           "title",
           "tasks"
         ],
@@ -55,6 +59,7 @@
             "type": "array",
             "items": {
               "type": "object",
+              "additionalProperties": false,
               "required": [
                 "title",
                 "type",

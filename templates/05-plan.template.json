@@ -1,0 +1,22 @@
+{
+    "version": "1.0",
+    "strategy": "FEATURE",
+    "milestone_title": "Title",
+    "source_artifacts": [],
+    "epics": [
+        {
+            "id": "E1",
+            "title": "Title",
+            "owner": "AI",
+            "description": "Desc",
+            "tasks": [
+                {
+                    "title": "Task 1",
+                    "type": "feat",
+                    "context_files": [],
+                    "acceptance_criteria": []
+                }
+            ]
+        }
+    ]
+}

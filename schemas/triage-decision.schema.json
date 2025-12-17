@@ -1,7 +1,10 @@
 {
+  "$id": "https://sdlc.ai/schemas/triage-decision.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Triage Decision",
+  "description": "Output of the Phase 0 complexity analysis.",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "complexity_score",
     "classification",
@@ -11,17 +14,20 @@
     "complexity_score": {
       "type": "number",
       "minimum": 0,
-      "maximum": 10
+      "maximum": 10,
+      "description": "1-3: Low, 4-6: Med, 7-10: High"
     },
     "classification": {
       "type": "string",
       "enum": [
         "MAJOR",
         "MINOR"
-      ]
+      ],
+      "description": "MAJOR requires full governance; MINOR fast-tracks to verification."
     },
     "reason": {
-      "type": "string"
+      "type": "string",
+      "description": "Justification for the classification."
     },
     "override_by_human": {
       "type": "boolean"

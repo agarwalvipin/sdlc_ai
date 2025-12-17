@@ -1,0 +1,6 @@
+{
+    "complexity_score": 8,
+    "classification": "MAJOR",
+    "reason": "Security critical change involving auth logic and new dependencies",
+    "override_by_human": false
+}

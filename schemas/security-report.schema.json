@@ -1,7 +1,10 @@
 {
+    "$id": "https://sdlc.ai/schemas/security-report.schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Security Report",
+    "description": "Output of the Phase 3 threat modeling process.",
     "type": "object",
+    "additionalProperties": false,
     "required": [
         "phase",
         "risk_score",
@@ -26,6 +29,7 @@
             "type": "array",
             "items": {
                 "type": "object",
+                "additionalProperties": false,
                 "required": [
                     "threat",
                     "mitigation",
@@ -51,6 +55,7 @@
         },
         "auth_review": {
             "type": "object",
+            "additionalProperties": false,
             "required": [
                 "new_permissions",
                 "sensitive_data_exposure"

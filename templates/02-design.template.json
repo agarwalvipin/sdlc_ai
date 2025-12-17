@@ -1,0 +1,19 @@
+{
+    "phase": "design",
+    "architectural_changes": [
+        {
+            "component": "Name",
+            "change_type": "NEW",
+            "description": "Desc"
+        }
+    ],
+    "component_impact": [],
+    "alternatives_considered": [
+        {
+            "name": "Alt",
+            "pros": [],
+            "cons": [],
+            "selected": false
+        }
+    ]
+}
