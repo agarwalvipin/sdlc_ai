@@ -1,0 +1,38 @@
+{
+    "$id": "https://sdlc.ai/schemas/addons/data-privacy.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Data Privacy Impact Assessment",
+    "description": "Validation for Phase 3.5 Data usage.",
+    "type": "object",
+    "required": [
+        "phase",
+        "pii_fields",
+        "data_retention_days",
+        "classification",
+        "third_party_sharing"
+    ],
+    "properties": {
+        "phase": {
+            "type": "string",
+            "const": "data-privacy"
+        },
+        "pii_fields": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "List of PII fields involved."
+        },
+        "data_retention_days": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of days data is kept."
+        },
+        "classification": {
+            "type": "string",
+            "enum": ["Public", "Internal", "Confidential", "Restricted"]
+        },
+        "third_party_sharing": {
+            "type": "boolean",
+            "description": "Is data shared externally?"
+        }
+    }
+}

@@ -2,27 +2,29 @@
 
 **AI-Assisted Software Development Life Cycle (Governance System)**
 
-This repository hosts the **SDLC AI** system, a mature governance framework designed to enforce security, architectural integrity, and deterministic execution in AI-assisted coding workflows.
+A mature governance framework designed to enforce security, architectural integrity, and deterministic execution in AI-assisted coding workflows.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- **Antigravity** (Google Deepmind) or compatible AI agent environment.
-- **Node.js 16+** (for schema validation).
-- **Python 3.9+** (if running Python examples).
+```bash
+# Clone this repo
+git clone https://github.com/agarwalvipin/sdlc_ai.git
 
-### Your First Workflow
-1.  **Initialize**: Copy `templates/00-triage.template.md` to `architecture/00-triage.md`.
-2.  **Define**: Describe your change in the Triage document.
-3.  **Validate**: Run `pre-commit run --all-files` to check your JSON.
-4.  **Execute**: Follow the 8-phase workflow below.
+# Onboard to your project (interactive)
+cd sdlc_ai
+./onboard.sh /path/to/your/project
+```
 
-## 📚 Documentation
-- **Core Governance**: [FLOW_AND_GOVERNANCE.md](governance/FLOW_AND_GOVERNANCE.md)
-- **Workflows**: [.agent/workflows/](.agent/workflows/)
-- **Schemas**: [schemas/](schemas/)
-- **Templates**: [templates/](templates/)
-- **Examples**: [examples/](examples/)
+The script will:
+1. Install the **Core Framework** (Phases 0-7).
+2. Prompt you to install optional **Add-on Modules** (Data Privacy, Operations).
+3. Detect existing installations and run in **Upgrade Mode** if applicable.
+
+---
 
 ## ⚡ 8-Phase Workflow
 
@@ -37,84 +39,133 @@ This repository hosts the **SDLC AI** system, a mature governance framework desi
 | **6** | **Execute** | `06-report.md` | Coding & Implementation. |
 | **7** | **Verify** | `07-verify.md` | Final Quality Gate. |
 
-### Visual Workflow
 ```mermaid
-flowchart TD
-    subgraph "Phase 0-1: Analysis"
-        P0[Phase 0: Triage] -->|Major| P1[Phase 1: Context]
-        P0 -->|Minor| P7[Phase 7: Fast Track]
-    end
-
-    subgraph "Phase 2-3: Engineering"
-        P1 --> P2[Phase 2: Design]
-        P2 --> P3[Phase 3: Security]
-    end
-
-    subgraph "Phase 4: Governance"
-        P3 --> P4{Phase 4: Decision}
-        P4 -->|APPROVED| P5[Phase 5: Plan]
-        P4 -->|ABORT| Stop
-    end
-
-    subgraph "Phase 5-7: Delivery"
-        P5 --> P6[Phase 6: Execution]
-        P6 --> P7[Phase 7: Verification]
-    end
+flowchart LR
+    P0[0: Triage] --> P1[1: Context] --> P2[2: Design] --> P3[3: Security]
+    P3 --> P4{4: Decision}
+    P4 -->|APPROVED| P5[5: Plan] --> P6[6: Execute] --> P7[7: Verify]
+    P4 -->|ABORT| Stop((Stop))
+    P0 -.->|Minor| P7
 ```
 
-## 🛠 Features
+---
+
+## 🧩 Modular Architecture
+
+SDLC AI is designed to be **extensible**. You always start with the **Core Framework**, but can add optional **Governance Modules** based on your project's needs.
+
+### Core Framework (Always Installed)
+Phases 0-7 covering Triage, Context, Design, Security, Decision, Planning, Execution, and Verification.
+
+### Add-on Modules (Optional)
+
+| Module | Phase | Trigger | Description |
+| :--- | :--- | :--- | :--- |
+| **Data Privacy** | 3.5 | Processing PII or user data | GDPR/Sovereignty compliance, data classification, retention policies. |
+| **Operations** | 8 | Launching to production | SLIs, Runbooks, escalation policies for Day 2 readiness. |
+
+📖 See [governance/MODULES.md](governance/MODULES.md) for the full module catalog.
+
+### Module Manifest
+
+All modules are declared in [`templates/addons/manifest.json`](templates/addons/manifest.json). This allows:
+- **Dynamic Discovery**: `onboard.sh` reads modules from the manifest.
+- **Programmatic Triggers**: AI workflows can query the manifest to auto-detect when to invoke add-ons.
+- **Easy Extension**: Add a new module by creating a folder and updating the manifest—no script changes required.
+
+---
+
+## 🛠 Key Features
 
 ### Double-Write Rule
 Every phase produces two artifacts:
-1.  **Human-Readable (`.md`)**: For reasoning, audit, and communication.
-2.  **Machine-Enforceable (`.json`)**: For strict validation and automation.
+1. **Human-Readable (`.md`)**: For reasoning, audit, and communication.
+2. **Machine-Enforceable (`.json`)**: For strict validation and automation.
 
 ### Human Firewall
-**Phase 4** requires an explicit human signature in the `04-decision.json` file. The AI agent is forbidden from proceeding to code generation without this signed authorization.
+**Phase 4** requires an explicit human signature. The AI agent is forbidden from proceeding to code generation without signed authorization.
 
 ### Automated Validation
-We use JSON Schema to strictly validate all governance artifacts.
-- **CI/CD**: GitHub Actions workflow automatically validates all PRs.
+- **CI/CD**: GitHub Actions validates all PRs against JSON Schemas.
 - **Local**: Pre-commit hooks ensure validity before commit.
 
+### Interactive Onboarding
+```bash
+./onboard.sh /path/to/project
+```
+- Detects existing governance installations (**Upgrade Mode**).
+- Prompts for optional modules (Data Privacy, Operations).
+- Copies only what's needed—no overwrites without consent.
+
+### Visual Dashboard
+Launch the dashboard to explore the governance flow visually:
+```bash
+python3 -m http.server 8081 --directory docs
+# Open http://localhost:8081
+```
+Toggle "Show Add-ons" to see optional phases (3.5, 8).
+
+---
+
 ## 📂 Project Structure
+
 ```
 .
-├── .agent/workflows/       # Agent instructions for each phase
-├── architecture/           # The "Ledger" - where your artifacts live
-├── examples/               # Complete worked examples
-├── governance/             # Core rules and philosophy
-├── schemas/                # JSON Schemas for validation
-└── templates/              # Blank templates for new tasks
+├── .agent/workflows/           # Agent instructions for each phase
+├── architecture/               # The "Ledger" - your project's artifacts
+├── docs/                       # Visual dashboard (index.html)
+├── examples/                   # Complete worked examples
+├── governance/                 # Core rules, modules catalog, changelog rule
+│   ├── FLOW_AND_GOVERNANCE.md  # Philosophy and flow
+│   ├── MODULES.md              # Available modules catalog
+│   └── CHANGELOG_RULE.md       # Changelog discipline
+├── schemas/                    # JSON Schemas for validation
+├── templates/
+│   ├── core/                   # Core phase templates (0-7)
+│   └── addons/                 # Optional module templates
+│       ├── manifest.json       # Module registry
+│       ├── data-privacy/       # Phase 3.5 templates
+│       └── operations/         # Phase 8 templates
+├── CHANGELOG.md                # Project changelog
+├── onboard.sh                  # Interactive onboarding script
+└── README.md
 ```
 
-## 📦 Onboarding to an Existing Project
+---
 
-### Quick Setup (Script)
+## 📚 Documentation
+
+| Document | Purpose |
+| :--- | :--- |
+| [FLOW_AND_GOVERNANCE.md](governance/FLOW_AND_GOVERNANCE.md) | Core philosophy and workflow rules. |
+| [MODULES.md](governance/MODULES.md) | Catalog of available governance modules. |
+| [CHANGELOG_RULE.md](governance/CHANGELOG_RULE.md) | Changelog discipline for contributors. |
+| [CHANGELOG.md](CHANGELOG.md) | Project change history. |
+
+---
+
+## 🔄 Upgrading
+
+Already have SDLC AI installed? Run the onboarding script again:
 
 ```bash
-# Clone this repo
-git clone https://github.com/agarwalvipin/sdlc_ai.git
-
-# Run the onboarding script
-cd sdlc_ai
 ./onboard.sh /path/to/your/project
 ```
 
-### Manual Setup
+The script will detect your existing installation and offer to:
+- Update Core templates (optional).
+- Add new modules you didn't install before.
 
-```bash
-# Copy framework directories
-cp -r .agent /path/to/your/project/
-cp -r schemas /path/to/your/project/
-cp -r templates /path/to/your/project/
-cp -r governance /path/to/your/project/
+---
 
-# Create the architecture ledger
-mkdir -p /path/to/your/project/architecture
-```
+## 🤝 Contributing
 
-📖 See the full [Onboarding Guide](docs/onboarding.md) for details.
+1. Follow the [Changelog Discipline](governance/CHANGELOG_RULE.md) for user-facing changes.
+2. Validate schemas with `pre-commit run --all-files`.
+3. Run the full governance workflow for significant changes.
+
+---
 
 ## License
+
 MIT

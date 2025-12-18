@@ -331,6 +331,18 @@
                         <strong>Automation:</strong> Enforcer.
                     </p>
                 </div>
+                <!-- Principle 5 (New) -->
+                <div
+                    class="group p-6 bg-gradient-to-br from-pink-50 to-white rounded-2xl border border-slate-200 hover:border-pink-300 hover:shadow-lg transition-all">
+                    <div
+                        class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-5 text-3xl group-hover:scale-110 transition-transform">
+                        🧩</div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Modular & Extensible</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Start with Core. Add <strong>Data Privacy</strong> or <strong>Runbooks</strong> later by simply
+                        re-running the script.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -396,6 +408,10 @@
                             onclick="selectPhase(2)" id="phase-dot-2">2</div>
                         <div class="phase-node phase-middle relative z-10 w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold shadow-lg transition-all duration-300"
                             onclick="selectPhase(3)" id="phase-dot-3">3</div>
+
+                        <!-- Ghost Node 3.5 -->
+                        <div class="phase-node phase-addon hidden relative z-10 w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold shadow-lg ring-2 ring-purple-200 transition-all duration-300"
+                            onclick="selectPhase(3.5)" id="phase-dot-3.5" style="transform: translateY(40px);">3.5</div>
                         <div class="phase-node phase-middle relative z-10 w-14 h-14 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold shadow-lg ring-4 ring-yellow-200 transition-all duration-300"
                             onclick="selectPhase(4)" id="phase-dot-4">4</div>
                         <div class="phase-node phase-middle relative z-10 w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center font-bold shadow-lg transition-all duration-300"
@@ -404,6 +420,10 @@
                             onclick="selectPhase(6)" id="phase-dot-6">6</div>
                         <div class="phase-node phase-endpoint relative z-10 w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center font-bold shadow-lg transition-all duration-300"
                             onclick="selectPhase(7)" id="phase-dot-7">7</div>
+
+                        <!-- Ghost Node 8 -->
+                        <div class="phase-node phase-addon hidden relative z-10 w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold shadow-lg ring-2 ring-purple-200 transition-all duration-300"
+                            onclick="selectPhase(8)" id="phase-dot-8" style="transform: translateX(10px);">8</div>
                     </div>
 
                     <!-- Branching Info -->
@@ -421,6 +441,15 @@
                                     class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center font-bold text-xs mr-2">m</span>
                                 <span class="text-slate-600"><strong>MINOR</strong>: Phase 0 → Phase 7 (fast-track)
                                     ⚡</span>
+                            </div>
+                            <div class="w-px h-6 bg-slate-300"></div>
+                            <div class="flex items-center px-3 py-1 rounded-lg hover:bg-purple-50 transition-all cursor-pointer"
+                                onclick="toggleModules()">
+                                <span
+                                    class="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold text-xs mr-2"
+                                    id="module-toggle-icon">+</span>
+                                <span class="text-slate-600"><strong>MODULES</strong>: <span
+                                        id="module-toggle-text">Show Add-ons</span></span>
                             </div>
                         </div>
                     </div>
@@ -810,8 +839,55 @@
                 artifacts: ['07-verify.md'],
                 schema: null,
                 special: null
+            },
+            3.5: {
+                badge: 'Phase 3.5 • Add-on',
+                badgeColor: 'bg-purple-100 text-purple-700',
+                title: 'Data Privacy',
+                subtitle: 'Sovereignty & GDPR',
+                goal: 'Ensure compliance with data protection laws. Classify PII, define retention, and list third-party processors.',
+                actor: '🤖 AI (Compliance)',
+                actorType: 'ai',
+                artifacts: ['03x-data-privacy.md', 'schema.json'],
+                schema: 'data-privacy.schema.json',
+                special: null
+            },
+            8: {
+                badge: 'Phase 8 • Add-on',
+                badgeColor: 'bg-purple-100 text-purple-700',
+                title: 'Operations',
+                subtitle: 'Day 2 Readiness',
+                goal: 'Define Service Level Indicators (SLIs) and Runbooks. Ensure the feature is observable and maintainable.',
+                actor: '🤖 AI (SRE)',
+                actorType: 'ai',
+                artifacts: ['08-operations.md'],
+                schema: 'operations.schema.json',
+                special: null
             }
         };
+
+        function toggleModules() {
+            const addons = document.querySelectorAll('.phase-addon');
+            const icon = document.getElementById('module-toggle-icon');
+            const text = document.getElementById('module-toggle-text');
+
+            addons.forEach(el => {
+                el.classList.toggle('hidden');
+                // Trigger reflow for animation
+                if (!el.classList.contains('hidden')) {
+                    el.style.opacity = 0;
+                    setTimeout(() => el.style.opacity = 1, 50);
+                }
+            });
+
+            if (icon.innerText === '+') {
+                icon.innerText = '-';
+                text.innerText = "Hide Add-ons";
+            } else {
+                icon.innerText = '+';
+                text.innerText = "Show Add-ons";
+            }
+        }
 
         // ============================================
         // SCHEMA DATA

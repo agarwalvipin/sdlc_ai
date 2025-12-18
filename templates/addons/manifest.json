@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "version": "1.0.0",
+    "modules": [
+        {
+            "id": "data-privacy",
+            "name": "Data Privacy (GDPR/Sovereignty)",
+            "phase": "3.5",
+            "description": "Ensures compliance with data protection laws. Classify PII, define retention, and list third-party processors.",
+            "trigger": "Processing PII, user data, or changes to data retention policies.",
+            "files": {
+                "template": "data-privacy/03x-data-privacy.template.md",
+                "schema": "data-privacy/schema.json"
+            },
+            "install": {
+                "templateDest": "templates/03x-data-privacy.template.md",
+                "schemaDest": "schemas/data-privacy.schema.json"
+            },
+            "requires": [
+                "security"
+            ],
+            "prompt": "Do you process PII/User Data? (Adds Phase 3.5)"
+        },
+        {
+            "id": "operations",
+            "name": "Operations (Day 2 Readiness)",
+            "phase": "8",
+            "description": "Define Service Level Indicators (SLIs) and Runbooks. Ensure the feature is observable and maintainable.",
+            "trigger": "Launching a new service to production or significant changes to reliability guarantees.",
+            "files": {
+                "template": "operations/08-operations.template.md",
+                "schema": "operations/schema.json"
+            },
+            "install": {
+                "templateDest": "templates/08-operations.template.md",
+                "schemaDest": "schemas/operations.schema.json"
+            },
+            "requires": [],
+            "prompt": "Do you need Operational Runbooks? (Adds Phase 8)"
+        }
+    ]
+}

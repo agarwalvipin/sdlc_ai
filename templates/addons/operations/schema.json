@@ -1,0 +1,45 @@
+{
+    "$id": "https://sdlc.ai/schemas/addons/operations.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Operational Readiness Review",
+    "description": "Validation for Phase 8 Operations.",
+    "type": "object",
+    "required": [
+        "phase",
+        "alert_thresholds",
+        "rollback_procedure",
+        "on_call_contact"
+    ],
+    "properties": {
+        "phase": {
+            "type": "string",
+            "const": "operations"
+        },
+        "alert_thresholds": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "metric",
+                    "threshold"
+                ],
+                "properties": {
+                    "metric": {
+                        "type": "string"
+                    },
+                    "threshold": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "rollback_procedure": {
+            "type": "string",
+            "description": "Command or link to rollback."
+        },
+        "on_call_contact": {
+            "type": "string",
+            "description": "Email or PagerDuty link."
+        }
+    }
+}
